@@ -40,6 +40,7 @@ class AuthDataUseCaseTest {
 
     assertThat(isLoaded, `is`(true))
     assertNotNull(authDataUseCase.get())
+    assertThat(authDataUseCase.get()?.token, `is`("hogehogeToken"))
   }
 
   @Test
