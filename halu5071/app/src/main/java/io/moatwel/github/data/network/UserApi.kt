@@ -31,5 +31,5 @@ import retrofit2.http.Header
 interface UserApi {
 
   @GET("/users/halu5071")
-  fun get(@Header("Authorization") token: String = ""): Observable<User>
+  fun get(): Observable<User>
 }
