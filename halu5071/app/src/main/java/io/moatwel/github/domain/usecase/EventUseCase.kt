@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class EventUseCase @Inject constructor(
   private val eventRepository: EventRepository
-){
+) {
 
   fun getList(name: String, page: Int): Observable<Response<List<Event>>> {
     return eventRepository.eventList(name, page)

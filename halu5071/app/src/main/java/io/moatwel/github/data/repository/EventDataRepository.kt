@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class EventDataRepository @Inject constructor(
   private val cloudEventDataSource: CloudEventDataSource
-): EventRepository {
+) : EventRepository {
 
   override fun eventList(name: String, page: Int): Observable<Response<List<Event>>> {
     return cloudEventDataSource.get(name, page)
