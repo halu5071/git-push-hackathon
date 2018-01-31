@@ -9,31 +9,33 @@ data class Repository(
 
   val name: String,
 
-  @Json(name = "full_name")
-  val fullName: String,
+  val url: String,
 
-  val owner: User,
+  @Json(name = "full_name")
+  val fullName: String?,
+
+  val owner: User?,
 
   @Json(name = "private")
-  val isPrivate: Boolean,
+  val isPrivate: Boolean?,
 
-  val description: String,
+  val description: String?,
 
-  val size: Int,
+  val size: Int?,
 
   @Json(name = "stargazers_count")
-  val stargazers: Int,
+  val stargazers: Int?,
 
   @Json(name = "watchers_count")
-  val watchers: Int,
+  val watchers: Int?,
 
-  val language: String,
+  val language: String?,
 
   @Json(name = "open_issues")
-  val openIssues: Int,
+  val openIssues: Int?,
 
-  val forks: Int,
+  val forks: Int?,
 
   @Json(name = "created_at")
-  val createdAt: Date
+  val createdAt: Date?
 ) : Serializable
