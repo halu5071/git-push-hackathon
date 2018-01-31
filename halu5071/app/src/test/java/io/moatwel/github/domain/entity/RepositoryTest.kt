@@ -37,6 +37,7 @@ class RepositoryTest {
     val repository = Repository(
       1234L,
       "git-push-hackathon",
+      "https://github.com",
       "halu5071/git-push-hackathon",
       user,
       false,
@@ -58,10 +59,10 @@ class RepositoryTest {
     assertThat(restore.name, `is`("git-push-hackathon"))
     assertThat(restore.size, `is`(439))
     assertThat(restore.language, `is`("Kotlin"))
-    assertThat(restore.owner.id, `is`(1234L))
-    assertThat(restore.owner.name, `is`("Yasunori Horii"))
-    assertThat(restore.owner.login, `is`("halu5071"))
-    assertThat(restore.owner.isHireable, `is`(false))
+    assertThat(restore.owner?.id, `is`(1234L))
+    assertThat(restore.owner?.name, `is`("Yasunori Horii"))
+    assertThat(restore.owner?.login, `is`("halu5071"))
+    assertThat(restore.owner?.isHireable, `is`(false))
   }
 
   @Test

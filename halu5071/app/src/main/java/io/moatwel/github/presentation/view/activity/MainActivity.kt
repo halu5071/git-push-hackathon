@@ -27,8 +27,13 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import dagger.android.AndroidInjection
 import io.moatwel.github.R
+import io.moatwel.github.domain.entity.event.Event
 import io.moatwel.github.domain.usecase.AuthDataUseCase
+import io.moatwel.github.domain.usecase.EventUseCase
 import io.moatwel.github.domain.usecase.UserUseCase
+import io.moatwel.github.presentation.util.observeOnMainThread
+import io.moatwel.github.presentation.util.subscribeOnIoThread
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +43,9 @@ class MainActivity : AppCompatActivity() {
 
   @Inject
   lateinit var authDataUseCase: AuthDataUseCase
+
+  @Inject
+  lateinit var eventUseCase: EventUseCase
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
@@ -49,6 +57,27 @@ class MainActivity : AppCompatActivity() {
       startActivity(intent)
     }
 
+    eventUseCase.getList("halu5071", 1)
+      .subscribeOnIoThread()
+      .observeOnMainThread()
+      .subscribe({
+        val events: List<Event>? = it.body()
+        events?.let {
+          it.forEach {
+            println("Actor: ${it.actor.name}")
+          }
+        }
+      }, {
+        Timber.e(it)
+      })
+
     userUseCase.get()
+      .subscribeOnIoThread()
+      .observeOnMainThread()
+      .subscribe({
+        Timber.d(it.name)
+      }, {
+        Timber.e(it)
+      })
   }
 }

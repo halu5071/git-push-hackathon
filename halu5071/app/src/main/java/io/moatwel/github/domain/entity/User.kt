@@ -41,13 +41,13 @@ data class User(
   val url: String,
 
   @Json(name = "html_url")
-  val htmlUrl: String,
+  val htmlUrl: String?,
 
   @Json(name = "followers_url")
-  val followersUrl: String,
+  val followersUrl: String?,
 
   @Json(name = "following_url")
-  val followingUrl: String,
+  val followingUrl: String?,
 
   val bio: String = "",
 

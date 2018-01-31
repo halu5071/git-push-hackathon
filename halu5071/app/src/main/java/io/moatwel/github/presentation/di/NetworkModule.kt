@@ -29,6 +29,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.Rfc3339DateJsonAdapter
 import dagger.Module
 import dagger.Provides
+import io.moatwel.github.data.network.EventApi
 import io.moatwel.github.data.network.HeaderInterceptor
 import io.moatwel.github.data.network.UserApi
 import io.moatwel.github.domain.usecase.AuthDataUseCase
@@ -77,6 +78,12 @@ class NetworkModule {
   @Singleton
   fun provideUserApi(retrofit: Retrofit): UserApi {
     return retrofit.create(UserApi::class.java)
+  }
+
+  @Provides
+  @Singleton
+  fun provideEventApi(retrofit: Retrofit): EventApi {
+    return retrofit.create(EventApi::class.java)
   }
 
   companion object {
