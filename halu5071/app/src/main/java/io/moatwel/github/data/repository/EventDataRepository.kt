@@ -11,7 +11,7 @@ class EventDataRepository @Inject constructor(
   private val cloudEventDataSource: CloudEventDataSource
 ): EventRepository {
 
-  override fun eventList(page: Int): Observable<Response<Event>> {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  override fun eventList(name: String, page: Int): Observable<Response<List<Event>>> {
+    return cloudEventDataSource.get(name, page)
   }
 }

@@ -6,5 +6,5 @@ import retrofit2.Response
 
 interface EventRepository {
 
-  fun eventList(page: Int = 1): Observable<Response<Event>>
+  fun eventList(name: String, page: Int = 1): Observable<Response<List<Event>>>
 }
