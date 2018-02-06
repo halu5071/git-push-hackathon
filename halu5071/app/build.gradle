@@ -13,6 +13,8 @@ android {
         versionCode 1
         versionName "1.0"
 
+        multiDexEnabled true
+
         def CLIENT_ID
         def CLIENT_SECRET
 
@@ -29,6 +31,8 @@ android {
 
         buildConfigField 'String', 'CLIENT_ID', "$CLIENT_ID"
         buildConfigField 'String', 'CLIENT_SECRET', "$CLIENT_SECRET"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -100,7 +104,7 @@ dependencies {
 
     // Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     // Architecture Components
     implementation "android.arch.lifecycle:extensions:$architecture_comp_version"
