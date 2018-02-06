@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "612188739102",
+    "firebase_url": "https://git-push-hackathon.firebaseio.com",
+    "project_id": "git-push-hackathon",
+    "storage_bucket": "git-push-hackathon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612188739102:android:f4d789250f00f1ab",
+        "android_client_info": {
+          "package_name": "io.moatwel.github"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "612188739102-ja5mbulojs0ggungm2gik8op6kknnal1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwmtuvDeTT8bbanoF3vMgmxSrjBDO6W84"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
