@@ -106,6 +106,9 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$architecture_comp_version"
     kapt "android.arch.lifecycle:compiler:$architecture_comp_version"
 
+    // Encryption
+    implementation "com.github.gfx.util.encrypt:android-encrypt-utils:2.0.0"
+
     // Test
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
