@@ -22,12 +22,15 @@
 
 package io.moatwel.github
 
+import android.content.Context
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import io.moatwel.github.data.datasource.Crypto
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
+import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -36,11 +39,23 @@ class CryptoTest {
 
   private lateinit var crypto: Crypto
   private val plainText = "SamplePlainTextGitHubToken12345"
+  private lateinit var contextBefore: Context
+  private lateinit var contextAfter: Context
+
+  @Before
+  fun before() {
+    contextBefore = InstrumentationRegistry.getTargetContext().applicationContext
+    contextAfter = InstrumentationRegistry.getTargetContext().applicationContext
+  }
+
+  @Test
+  fun testDifferentContext() {
+    assertNotEquals(contextBefore, `not`(contextAfter))
+  }
 
   @Test
   fun testEncryption() {
-    val context = InstrumentationRegistry.getTargetContext().applicationContext
-    crypto = Crypto(context)
+    crypto = Crypto(contextBefore)
 
     val encryptedText = crypto.encrypt(plainText)
 
@@ -49,8 +64,7 @@ class CryptoTest {
 
   @Test
   fun testDecryption() {
-    val context = InstrumentationRegistry.getTargetContext().applicationContext
-    crypto = Crypto(context)
+    crypto = Crypto(contextAfter)
 
     val encryptedText = "PYp6Sg2wC9Lt5Sz/8DFmItnlvxOsSdUE8IhT/drWi3g8UsCN+7aOtJM76pTRS12k"
 
