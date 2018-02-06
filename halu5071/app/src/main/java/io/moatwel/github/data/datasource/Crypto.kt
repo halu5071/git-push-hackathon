@@ -38,7 +38,6 @@ class Crypto @Inject constructor(
 
   private fun createEncryption(context: Context): Encryption? {
     return Encryption(Encryption.getDefaultCipher(), Encryption.getDefaultPrivateKey(context))
-
   }
 
   fun encrypt(plainText: String): String {
