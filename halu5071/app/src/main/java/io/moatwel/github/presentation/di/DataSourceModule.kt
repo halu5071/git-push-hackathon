@@ -29,8 +29,10 @@ import dagger.Provides
 import io.moatwel.github.data.datasource.AuthDataDataSource
 import io.moatwel.github.data.datasource.CloudEventDataSource
 import io.moatwel.github.data.datasource.CloudUserDataSource
+import io.moatwel.github.data.datasource.Crypto
 import io.moatwel.github.data.network.retrofit.EventApi
 import io.moatwel.github.data.network.retrofit.UserApi
+import javax.inject.Singleton
 
 @Module
 class DataSourceModule {
@@ -48,6 +50,12 @@ class DataSourceModule {
   @Provides
   fun provideAuthDataDataSource(context: Context, moshi: Moshi): AuthDataDataSource {
     return AuthDataDataSource(context, moshi)
+  }
+
+  @Provides
+  @Singleton
+  fun provideCrypto(context: Context): Crypto {
+    return Crypto(context)
   }
 
   companion object {

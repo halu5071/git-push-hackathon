@@ -1,7 +1,7 @@
 /*
  *  GitHub-Client
  *
- *  EventUseCase.kt
+ *  Crypto.kt
  *
  *  Copyright 2018 moatwel.io
  *  author : halu5071 (Yasunori Horii)
@@ -20,18 +20,31 @@
  *
  */
 
-package io.moatwel.github.domain.usecase
+package io.moatwel.github.data.datasource
 
-import io.moatwel.github.domain.entity.event.Event
-import io.moatwel.github.domain.repository.EventRepository
-import io.reactivex.Observable
+import android.content.Context
+import com.github.gfx.util.encrypt.Encryption
 import javax.inject.Inject
 
-class EventUseCase @Inject constructor(
-  private val eventRepository: EventRepository
+class Crypto @Inject constructor(
+  private val context: Context
 ) {
 
-  fun getEventList(name: String, page: Int): Observable<List<Event>> {
-    return eventRepository.eventList(name, page)
+  private var encryption: Encryption?
+
+  init {
+    encryption = createEncryption(context)
+  }
+
+  private fun createEncryption(context: Context): Encryption? {
+    return Encryption(Encryption.getDefaultCipher(), Encryption.getDefaultPrivateKey(context))
+  }
+
+  fun encrypt(plainText: String): String {
+    return encryption?.encrypt(plainText) ?: plainText
+  }
+
+  fun decrypt(encryptedText: String): String {
+    return encryption?.decrypt(encryptedText) ?: encryptedText
   }
 }
