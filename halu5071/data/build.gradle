@@ -1,0 +1,136 @@
+/*
+ *  GitHub-Client
+ *  
+ *  build
+ *  
+ *  Copyright 2018 moatwel.io
+ *  author : halu5071 (Yasunori Horii)
+ *  
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  
+ *          http://www.apache.org/licenses/LICENSE-2.0
+ *  
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *  
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        def CLIENT_ID
+        def CLIENT_SECRET
+
+        def file = project.file("gradle.properties")
+        if (file.exists()) {
+            def properties = new Properties()
+            properties.load(file.newDataInputStream())
+            CLIENT_ID = properties.get("CLIENT_ID")
+            CLIENT_SECRET = properties.get("CLIENT_SECRET")
+        } else {
+            CLIENT_ID = System.getenv("CLIENT_ID")
+            CLIENT_SECRET = System.getenv("CLIENT_SECRET")
+        }
+
+        buildConfigField 'String', 'CLIENT_ID', "$CLIENT_ID"
+        buildConfigField 'String', 'CLIENT_SECRET', "$CLIENT_SECRET"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(":domain")
+
+    // Rx
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
+
+    // RxLifecycle
+    implementation "com.trello.rxlifecycle2:rxlifecycle:$rxlifecycle_version"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-android:$rxlifecycle_version"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycle_version"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxlifecycle_version"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-android-lifecycle-kotlin:$rxlifecycle_version"
+
+    // Android-KTX
+    implementation 'androidx.core:core-ktx:0.1'
+
+    // Moshi
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+    implementation "com.squareup.moshi:moshi-adapters:$moshi_version"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+
+    // kotshi
+    implementation "se.ansman.kotshi:api:$kotshi_version"
+    kapt "se.ansman.kotshi:compiler:$kotshi_version"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
+    // Stetho
+    implementation "com.facebook.stetho:stetho:$stetho_version"
+    implementation "com.facebook.stetho:stetho-okhttp3:$stetho_version"
+
+    // Architecture Components
+    implementation "android.arch.lifecycle:extensions:$architecture_comp_version"
+    implementation "android.arch.lifecycle:reactivestreams:$architecture_comp_version"
+    kapt "android.arch.lifecycle:compiler:$architecture_comp_version"
+    implementation "android.arch.paging:runtime:1.0.0-alpha5"
+
+    // Encryption
+    implementation "com.madgag.spongycastle:core:$spongy_castle_version"
+    implementation "com.madgag.spongycastle:prov:$spongy_castle_version"
+    implementation "com.github.gfx.util.encrypt:android-encrypt-utils:2.0.0"
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:$timber_version"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:$mockito_verion"
+    testImplementation "org.powermock:powermock-core:$powermock_version"
+    testImplementation "org.powermock:powermock-module-junit4:$powermock_version"
+    testImplementation "org.powermock:powermock-api-mockito2:$powermock_version"
+    testImplementation "org.robolectric:robolectric:$robolectric_version"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttp_version"
+}
+repositories {
+    mavenCentral()
+    google()
+}

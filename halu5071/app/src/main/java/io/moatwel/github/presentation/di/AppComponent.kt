@@ -27,6 +27,9 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import io.moatwel.github.App
+import io.moatwel.github.data.di.DataSourceModule
+import io.moatwel.github.data.di.NetworkModule
+import io.moatwel.github.data.di.RepositoryModule
 import io.moatwel.github.presentation.di.activity.LoginActivityBuilder
 import io.moatwel.github.presentation.di.activity.MainActivityBuilder
 import javax.inject.Singleton

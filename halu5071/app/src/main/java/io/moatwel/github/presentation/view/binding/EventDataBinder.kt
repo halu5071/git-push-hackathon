@@ -24,7 +24,10 @@ object EventDataBinder {
   fun setEventContent(textView: TextView, event: Event) {
     val context = textView.context
     when (event.type) {
-      EventType.CommitCommentEvent -> textView.text = event.type.name
+      EventType.CommitCommentEvent -> {
+        textView.text =
+          context.getString(R.string.str_issue_comment, event.actor?.login, event.repo?.name)
+      }
       EventType.CreateEvent -> {
         textView.text =
           context.getString(R.string.str_create_event, event.actor?.login, event.repo?.name)
@@ -39,7 +42,10 @@ object EventDataBinder {
       EventType.ForkEvent -> {
         textView.text = context.getString(R.string.str_fork_event, event.actor?.login, event.repo?.name)
       }
-      EventType.GollumEvent -> textView.text = event.type.name
+      EventType.GollumEvent -> {
+        textView.text =
+          context.getString(R.string.str_issue_comment, event.actor?.login, event.repo?.name)
+      }
       EventType.IssueCommentEvent -> {
         textView.text =
           context.getString(R.string.str_issue_comment, event.actor?.login, event.repo?.name)

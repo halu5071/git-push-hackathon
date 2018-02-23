@@ -27,8 +27,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
 import dagger.android.support.DaggerAppCompatActivity
-import io.moatwel.github.BuildConfig
 import io.moatwel.github.R
+import io.moatwel.github.data.BuildConfig
 import io.moatwel.github.data.repository.UserDataRepository
 import io.moatwel.github.domain.entity.AuthData
 import io.moatwel.github.domain.repository.AuthDataRepository
