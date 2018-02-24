@@ -33,6 +33,4 @@ interface EventRepository {
    *  - refresh method to refresh data
    */
   fun getEventEntity(): EventEntity
-
-  fun refresh()
 }
