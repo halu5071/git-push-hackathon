@@ -26,7 +26,11 @@ import io.moatwel.github.domain.entity.EventEntity
 
 interface EventRepository {
 
+  /**
+   *  get [EventEntity] which knows
+   *  - [android.arch.paging.PagedList] for paging,
+   *  - [android.arch.lifecycle.LiveData] for NetworkState
+   *  - refresh method to refresh data
+   */
   fun getEventEntity(): EventEntity
-
-  fun refresh()
 }
